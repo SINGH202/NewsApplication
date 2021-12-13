@@ -1,0 +1,25 @@
+#main {
+    width: 95%;
+    display: flex;
+    /* height: 500px; */
+    margin: auto;
+  }
+  #sideBar {
+    width: 20%;
+  }
+  #newsContent {
+    width: 80%;
+  }
+  #company{
+      margin-left: 12px;
+  }
+  button{
+      
+      width: 100%;
+      background-color: transparent;
+      border: transparent;
+      font-size: 16px;
+      margin-top: 10px;
+      margin-left: 5px;
+      text-align: left;
+  }
