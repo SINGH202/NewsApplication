@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Page</title>
+    <link rel="stylesheet" href="./styles/sidebar.css">
+    <style>
+        
+        #newsContent{
+            width: 50%;
+            padding: 2%;
+            padding-top:25px;
+        }
+        img{
+            width: 95%;
+        }
+    </style>
+</head>
+<body>
+    <div id="main">
+        <div id="sideBar">
+          
+        </div>
+        <div id="newsContent">
+          
+        </div>
+      </div>
+</body>
+</html>
+<script type="module">
+
+    var div = document.getElementById("newsContent")
+
+    import sidebar from "./components/sidebar.js"
+    // console.log(sidebar);
+    document.getElementById("sideBar").innerHTML = sidebar();
+    // topNews();
+    
+    var data = JSON.parse(localStorage.getItem("News"))
+    console.log(data);
+    console.log(data.ti)
+
+    var img = document.createElement("img");
+    img.src=data.image
+
+    var src = document.createElement("p");
+    src.innerText= "( "+ data.src + " )"
+
+    var title = document.createElement("h2");
+    title.innerHTML=data.ti;
+
+    console.log(data.descr)
+    var dis = document.createElement("p");
+    dis.innerText = data.descr
+
+    var time = document.createElement("p")
+    time.innerText = data.t;
+
+    div.append(img, time, src, title, dis);
+</script>

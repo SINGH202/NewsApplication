@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Page</title>
+    <style>
+      /* div {
+        border: 1px solid black;
+      } */
+      #newss > div{
+          display: flex;
+      }
+      #newss > div > div{
+          width: 30%;
+      }
+      img{
+          width:100%
+      }
+      hr{
+          width: 90%;
+          margin-left: 0px;
+      }
+      
+    </style>
+    <link rel="stylesheet" href="./styles/sidebar.css">
+  </head>
+  <body>
+    <div id="main">
+      <div id="sideBar">
+        
+      </div>
+      <div id="newsContent">
+        <h3>The latest</h3>
+        <hr>
+        <div id="newss"></div>
+      </div>
+    </div>
+  </body>
+</html>
+
+<script type="module">
+  var apiKey = "16c6985c8c9541eabafd1e36f35537f8";
+
+    import sidebar from "./components/sidebar.js"
+    // console.log(sidebar);
+    document.getElementById("sideBar").innerHTML = sidebar();
+    topNews();
+    
+    import topNews from "./scripts/getTopNews.js"
+    
+    var newsDiv = document.getElementById("newss");
+
+    showNews();
+    async function showNews(){
+        var news = await topNews()
+        // console.log(Articles);
+        news.forEach((el, index) => {
+            var div = document.createElement("div");
+            var div1 = document.createElement("div");
+
+            var title = document.createElement("h2");
+            title.innerText = el.title; 
+
+            var source = document.createElement("p");
+            source.innerText = el.source.name
+            console.log(el);
+
+            let time = document.createElement("p");
+            time.innerText = el.publishedAt;
+
+            let div2 = document.createElement("div");
+            
+            let des = document.createElement("h4");
+            des.innerText=el.description;
+
+            let div3 =  document.createElement("div");
+
+            let img = document.createElement("img");
+            img.src = el.urlToImage;
+
+            let hr = document.createElement("hr");
+            console.log(el.content)
+
+            // console.log(el.title);
+            // console.log(el.source.name);
+            // console.log(el.publishedAt);
+            // console.log(el.description);
+            console.log(el)
+            div1.append(title, source, time);
+
+            div2.append(des);
+
+            div3.append(img);
+            div.append(div1, div2, div3);
+            div.addEventListener("click", nem => {
+                // console.log(index);
+                // console.log(el.title);
+                // console.log(el.source.name);
+                // console.log(el.publishedAt);
+                // console.log(el.description);
+                var data = {
+                    ti:el.title,
+                    src:el.source.name,
+                    t:el.publishedAt,
+                    descr:el.content,
+                    image:el.urlToImage
+                }
+                data = JSON.stringify(data);
+                // console.log(data);
+                localStorage.setItem("News", data);
+                window.location.href="news.html"
+            })
+            newsDiv.append(div, hr);
+        });
+    }
+</script>
